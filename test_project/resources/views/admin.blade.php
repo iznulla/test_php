@@ -1,10 +1,11 @@
 <html>
     <head>
-      <title>Админы</title>
+      <title>Vasya</title>
     </head>
     <body>
-        <div>Тут будет список юзеров: <a href="/index">Home</a></div>
+        <div>Тут будет список юзеров: <a href="/index">Home</a> <a href="/admin">Admin</a>
+        <a href="/lib">Lib</a></div>
         <hr>
-        Тут будут книги возможно будут юзеры
+       admin
     </body>
 </html>
