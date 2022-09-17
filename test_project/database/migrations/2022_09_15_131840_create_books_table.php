@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('authors_books', function (Blueprint $table) {
             $table->bigIncrements(column: 'id');
             $table->string(column: 'name');
-            $table->integer(column: 'authors_id');
+            $table->string(column: 'authors_id');
+            $table->timestamps();
         });
     }
 

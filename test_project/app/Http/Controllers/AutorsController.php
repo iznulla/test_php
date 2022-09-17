@@ -15,8 +15,8 @@ class AutorsController extends Controller
      */
     public function index()
     {
-        $books = Books::get();
-        return view('lib', compact('books'));
+        $books = Authors_books::get();
+        return view('index', compact('books'));
     }
 
     /**
@@ -37,7 +37,8 @@ class AutorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Authors_books::create($request->only(['name', 'authors_id']));
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -48,7 +49,7 @@ class AutorsController extends Controller
      */
     public function show(Authors_books $authors_books)
     {
-        //
+        return view('show');
     }
 
     /**
@@ -59,7 +60,7 @@ class AutorsController extends Controller
      */
     public function edit(Authors_books $authors_books)
     {
-        //
+        return view('form', compact('authors_books'));
     }
 
     /**

@@ -1,6 +1,7 @@
 @extends('layout')
 @section('title', 'Библиотека')
 @section('content')
+<a class="btn btn-primary" href=" {{ route('authors.create') }}">Добавить Автора</a>
 @foreach($books as $book)
 <table class="table">
   <thead>
@@ -16,7 +17,9 @@
       <th scope="row">{{ $book->id }}</th>
       <td>{{ $book->name }}</td>
       <td>{{ $book->authors_id }}</td>
-      <td>@mdo</td>
+      <td>
+        <a class="btn btn-warning" href="{{ route('authors.edit', $book) }}">Изменить</a>
+      </td>
     </tr>
   </tbody>
 </table>
