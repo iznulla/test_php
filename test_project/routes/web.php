@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AutorsController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\MainController@index');
+Route::redirect('/', 'authors');
 Route::get('/admin', 'App\Http\Controllers\MainController@admin');
 Route::get('/lib', 'App\Http\Controllers\MainController@lib');
-Route::get('/{books}', 'App\Http\Controllers\MainController@books');
+// Route::get('/{books}', 'App\Http\Controllers\MainController@books');
+
+Route::resource('/authors', AutorsController::class);

@@ -7,21 +7,24 @@ use App\Models\Books;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
-{   
-    public function index() {
+{
+    public function index()
+    {
         return view('index');
     }
-    public function admin() {
+    public function admin()
+    {
         return view('admin');
     }
-    public function lib() {
+    public function lib()
+    {
         $books = Books::get();
-        dump($books);
         return view('lib', compact('books'));
     }
-    public function books($books) {
-        $book = Books::where('name', $books)->first();
-        dump($book);
-        return view('books', compact('book'));
+    public function books($books)
+    {
+        // $book = Books::where('name', $books)->first();
+        dump($books);
+        return view('books', compact('books'));
     }
 }
