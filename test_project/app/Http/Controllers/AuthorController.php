@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Authors_books;
+use App\Models\Author;
 use Illuminate\Http\Request;
-use App\Models\Books;
 
-class AutorsController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class AutorsController extends Controller
      */
     public function index()
     {
-        $books = Authors_books::get();
-        return view('index', compact('books'));
+        $authors = Author::get();
+        return view('index', compact('authors'));
     }
 
     /**
@@ -37,52 +36,54 @@ class AutorsController extends Controller
      */
     public function store(Request $request)
     {
-        Authors_books::create($request->only(['name', 'authors_id']));
+        Author::create($request->only(['name', 'books']));
         return redirect()->route('authors.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Authors_books  $authors_books
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function show(Authors_books $authors_books)
+    public function show(Author $author)
     {
-        return view('show');
+        return view('show', compact('author'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Authors_books  $authors_books
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function edit(Authors_books $authors_books)
+    public function edit(Author $author)
     {
-        return view('form', compact('authors_books'));
+        return view('form', compact('author'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Authors_books  $authors_books
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Authors_books $authors_books)
+    public function update(Request $request, Author $author)
     {
-        //
+        $author->update($request->only(['name', 'books']));
+        return redirect()->route('authors.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Authors_books  $authors_books
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Authors_books $authors_books)
+    public function destroy(Author $author)
     {
-        //
+        $author->delete();
+        return redirect()->route('authors.index');
     }
 }

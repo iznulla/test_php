@@ -1,24 +1,35 @@
 @extends('layout')
-@section('title', isset($authors_books) ? 'Изменить '.$authors_books->name : 'Создать автора')
-{{-- {{dd($authors_books)}} --}}
+
+@section('title', isset($author) ? 'Изменить '.$author->name : 'Добавить автора')
+
 @section('content')
-<form method="POST" action="{{ route('authors.store') }}">
-    @csrf
-    <div class="row">
-        <div class="col">
-            <input name="name" value="{{ isset($authors_books) ? $authors_books : null }}" type="text" class="form-control" placeholder="Name" aria-label="name">
+    <a type="button" class="btn btn-secondary" href="{{ route('authors.index') }}">Назад к авторам</a>
+    <form method="POST"
+          @if(isset($author))
+              action="{{ route('authors.update', $author) }}"
+          @else
+              action="{{ route('authors.store') }}"
+          @endif>
+        @csrf
+        @isset($author)
+            @method("PUT")
+        @endisset
+        <div class="row mt-2">
+            <div class="col">
+                <input name="name"
+                       value="{{ isset($author) ? $author->name : null }}"
+                       type="text" class="form-control" placeholder="name" aria-label="name">
+            </div>
+            <div class="col">
+                <input name="books"
+                       value="{{ isset($author) ? $author->books : null }}"
+                       type="text" class="form-control" placeholder="book name" aria-label="books">
+            </div>
         </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col">
-            <input name="authors_id" value="{{ isset($authors) ? $authors_book->authors_id : null }}" type="text" class="form-control" placeholder="authors_id" aria-label="authors_id">
+        <div class="row mt-2">
+            <div class="col">
+                <button type="submit" class="btn btn-dark">Добавить</button>
+            </div>
         </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col">
-            <button type="submit" class="btn btn-dark">Добавить</button>
-        </div>
-    </div>
-    </div>
-</form>
+    </form>
 @endsection
